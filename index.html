@@ -26,10 +26,25 @@
         .view-btn { display: inline-block; width: 100%; padding: 12px 0; background: var(--primary-color); color: white; text-align: center; border-radius: 8px; font-size: 0.95rem; font-weight: bold; margin-top: 10px; }
         
         /* 分類按鈕卡片 */
-        .category-container { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; margin-bottom: 5px; scrollbar-width: none; }
+        .category-container { display: flex; gap: 8px; overflow-x: auto; padding: 10px 20px; margin-bottom: 5px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .category-container::-webkit-scrollbar { display: none; }
-        .cat-btn { white-space: nowrap; padding: 8px 16px; border-radius: 20px; background: white; border: 1px solid #ddd; font-size: 0.85rem; color: #57606f; cursor: pointer; transition: 0.2s; }
-        .cat-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .category-container::after { content: ""; padding-right: 20px; } /* 增加右側餘白提示 */
+        
+        .cat-btn { white-space: nowrap; padding: 8px 18px; border-radius: 20px; background: white; border: 1px solid #ddd; font-size: 0.85rem; color: #57606f; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .cat-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3); }
+
+        /* 滑動提示漸層 */
+        .category-wrapper { position: relative; width: 100%; }
+        .category-wrapper::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(241, 242, 246, 0), rgba(241, 242, 246, 1));
+            pointer-events: none;
+        }
         
         #loading { padding: 20px; color: #a4b0be; font-size: 0.8rem; }
         .footer { margin-top: 50px; padding-bottom: 30px; font-size: 0.7rem; color: #a4b0be; }
@@ -51,13 +66,15 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="🔍 搜尋 5,000+ 件爆款好物...">
         </div>
-        <div class="category-container" id="category-container">
-            <button class="cat-btn active" onclick="setCategory(this, '')">全部</button>
-            <button class="cat-btn" onclick="setCategory(this, '露營')">🏕️ 露營</button>
-            <button class="cat-btn" onclick="setCategory(this, '手錶')">⌚ 穿戴</button>
-            <button class="cat-btn" onclick="setCategory(this, '雨衣')">👗 服飾</button>
-            <button class="cat-btn" onclick="setCategory(this, '燈')">💡 燈具</button>
-            <button class="cat-btn" onclick="setCategory(this, '磁吸')">🧲 磁吸配件</button>
+        <div class="category-wrapper">
+            <div class="category-container" id="category-container">
+                <button class="cat-btn active" onclick="setCategory(this, '')">全部</button>
+                <button class="cat-btn" onclick="setCategory(this, '露營')">🏕️ 露營</button>
+                <button class="cat-btn" onclick="setCategory(this, '手錶')">⌚ 穿戴</button>
+                <button class="cat-btn" onclick="setCategory(this, '雨衣')">👗 服飾</button>
+                <button class="cat-btn" onclick="setCategory(this, '燈')">💡 燈具</button>
+                <button class="cat-btn" onclick="setCategory(this, '磁吸')">🧲 磁吸配件</button>
+            </div>
         </div>
     </div>
 
