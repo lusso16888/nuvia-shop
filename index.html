@@ -106,7 +106,14 @@
         // 分類切換邏輯
         function setCategory(cat) {
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.innerText.includes(cat) || (cat === '' && btn.innerText === '全部'));
+                const btnText = btn.innerText;
+                // 精準匹配：如果點選「全部」，則匹配「全部」按鈕
+                if (cat === '') {
+                    btn.classList.toggle('active', btnText === '全部');
+                } else {
+                    // 模糊匹配：檢查按鈕文字是否包含傳入的關鍵字 (例如「穿戴」包含在「⌚ 穿戴」中)
+                    btn.classList.toggle('active', btnText.includes(cat));
+                }
             });
             searchInput.value = cat;
             triggerSearch();
