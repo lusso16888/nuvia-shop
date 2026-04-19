@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvia 拾光 | AI 嚴選好物導航</title>
+    <style>
+        :root { --primary-color: #ff4757; --bg-color: #f1f2f6; }
+        body { font-family: -apple-system, system-ui, sans-serif; background-color: var(--bg-color); margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { margin-bottom: 30px; }
+        .header img { width: 80px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header h1 { font-size: 1.2rem; color: #2f3542; margin: 10px 0; }
+        .product-list { display: flex; flex-direction: column; gap: 15px; }
+        .product-item { background: white; padding: 15px; border-radius: 12px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .product-item:hover { transform: translateY(-2px); }
+        .product-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: #eee; }
+        .product-info { flex: 1; text-align: left; }
+        .product-name { font-weight: bold; font-size: 1rem; color: #2f3542; margin-bottom: 4px; }
+        .view-btn { font-size: 0.8rem; color: var(--primary-color); font-weight: bold; }
+        .footer { margin-top: 40px; font-size: 0.7rem; color: #a4b0be; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://github.com/identicons/nuvia.png" alt="Logo">
+            <h1>Nuvia 拾光 | AI 嚴選好物</h1>
+            <p style="font-size: 0.8rem; color: #747d8c;">點擊下方按鈕前往賣場領取優惠</p>
+        </div>
+
+        <div class="product-list" id="product-list">
+            <!-- 程式會自動將新產品插入到這裡 -->
+            <!-- PREPEND_MARKER -->
+        </div>
+
+        <div class="footer">
+            <p>🤖 本網頁由 AI 自動同步更新</p>
+            <p>本站包含聯盟行銷連結，您的購買將支持頻道運作。<br>
+            影片內容為 AI 生成，可能與實物有異，請以賣場說明為準。</p>
+        </div>
+    </div>
+</body>
+</html>
