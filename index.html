@@ -84,6 +84,14 @@
 
         function renderNext() {
             const source = filteredItems.length > 0 || searchInput.value ? filteredItems : allItems;
+            
+            // 如果搜尋後沒資料，顯示提示
+            if (source.length === 0) {
+                listEl.innerHTML = '<div style="padding: 40px; color: #a4b0be; font-size: 0.9rem;">查無相關商品，換個關鍵字試試看？</div>';
+                loadingEl.style.display = 'none';
+                return;
+            }
+
             const end = Math.min(currentIndex + step, source.length);
             
             for (let i = currentIndex; i < end; i++) {
@@ -100,7 +108,9 @@
             }
             
             currentIndex = end;
-            loadingEl.style.display = currentIndex >= source.length ? 'none' : 'block';
+            // 只有當「還沒全部跑完」時才顯示載入中
+            loadingEl.style.display = (currentIndex >= source.length || source.length === 0) ? 'none' : 'block';
+            loadingEl.innerText = (currentIndex < source.length) ? '🔼 往下捲動載入更多...' : '';
         }
 
         // 分類切換邏輯
