@@ -40,9 +40,12 @@
         <div class="header">
             <img src="https://github.com/lusso16888.png" alt="Logo">
             <h1>Nuvia 拾光 | AI 嚴選好物</h1>
-            <p style="font-size: 0.75rem; color: #a4b0be; margin-top: 5px; padding: 0 20px; line-height: 1.4;">
-                本站內容由 AI 自動推薦，部分連結包含聯盟行銷分潤。<br>
-                點選連結前往各平台，您的購買將支持本站持續營運。
+            <p style="font-size: 0.75rem; color: #a4b0be; margin-top: 5px; padding: 0 20px; line-height: 1.5; text-align: center;">
+                本站僅提供商品資訊推薦，所有商品連結皆跳轉至<b>蝦皮購物 (Shopee)</b> 原廠或正規店家。
+                我們不經手交易及金流，購買後續維護、發貨與退換貨請洽詢原訂單賣家。<br>
+                <span style="display: block; margin-top: 4px; color: #ff4757; font-weight: bold;">
+                    * 點擊連結表示您瞭解本站將獲得聯盟行銷分潤支持 *
+                </span>
             </p>
         </div>
         <div class="search-container">
@@ -124,9 +127,11 @@
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 const btnText = btn.innerText;
+                // 使用 includes 且去除 Emoji 影響來做精準匹配
                 if (cat === '') {
                     btn.classList.toggle('active', btnText === '全部');
                 } else {
+                    // 檢查按鈕文字是否包含傳入的關鍵字
                     btn.classList.toggle('active', btnText.includes(cat));
                 }
             });
