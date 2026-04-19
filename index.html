@@ -52,12 +52,12 @@
             <input type="text" id="searchInput" placeholder="🔍 搜尋 5,000+ 件爆款好物...">
         </div>
         <div class="category-container" id="category-container">
-            <button class="cat-btn active" onclick="setCategory('')">全部</button>
-            <button class="cat-btn" onclick="setCategory('露營')">🏕️ 露營</button>
-            <button class="cat-btn" onclick="setCategory('手錶')">⌚ 穿戴</button>
-            <button class="cat-btn" onclick="setCategory('雨衣')">👗 服飾</button>
-            <button class="cat-btn" onclick="setCategory('燈')">💡 燈具</button>
-            <button class="cat-btn" onclick="setCategory('磁吸')">🧲 磁吸配件</button>
+            <button class="cat-btn active" onclick="setCategory(this, '')">全部</button>
+            <button class="cat-btn" onclick="setCategory(this, '露營')">🏕️ 露營</button>
+            <button class="cat-btn" onclick="setCategory(this, '手錶')">⌚ 穿戴</button>
+            <button class="cat-btn" onclick="setCategory(this, '雨衣')">👗 服飾</button>
+            <button class="cat-btn" onclick="setCategory(this, '燈')">💡 燈具</button>
+            <button class="cat-btn" onclick="setCategory(this, '磁吸')">🧲 磁吸配件</button>
         </div>
     </div>
 
@@ -123,18 +123,11 @@
         let currentCategory = '';
         let currentSearchQuery = '';
 
-        function setCategory(cat) {
+        function setCategory(btn, cat) {
             currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                const btnText = btn.innerText;
-                // 使用 includes 且去除 Emoji 影響來做精準匹配
-                if (cat === '') {
-                    btn.classList.toggle('active', btnText === '全部');
-                } else {
-                    // 檢查按鈕文字是否包含傳入的關鍵字
-                    btn.classList.toggle('active', btnText.includes(cat));
-                }
-            });
+            // 直接操作 DOM 狀態，不再依賴文字比對
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
             triggerSearch();
         }
 
