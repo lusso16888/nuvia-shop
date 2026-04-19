@@ -40,6 +40,10 @@
         <div class="header">
             <img src="https://github.com/lusso16888.png" alt="Logo">
             <h1>Nuvia 拾光 | AI 嚴選好物</h1>
+            <p style="font-size: 0.75rem; color: #a4b0be; margin-top: 5px; padding: 0 20px; line-height: 1.4;">
+                本站內容由 AI 自動推薦，部分連結包含聯盟行銷分潤。<br>
+                點選連結前往各平台，您的購買將支持本站持續營運。
+            </p>
         </div>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="🔍 搜尋 5,000+ 件爆款好物...">
@@ -113,35 +117,37 @@
             loadingEl.innerText = (currentIndex < source.length) ? '🔼 往下捲動載入更多...' : '';
         }
 
-        // 分類切換邏輯
+        let currentCategory = '';
+        let currentSearchQuery = '';
+
         function setCategory(cat) {
+            currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 const btnText = btn.innerText;
-                // 精準匹配：如果點選「全部」，則匹配「全部」按鈕
                 if (cat === '') {
                     btn.classList.toggle('active', btnText === '全部');
                 } else {
-                    // 模糊匹配：檢查按鈕文字是否包含傳入的關鍵字 (例如「穿戴」包含在「⌚ 穿戴」中)
                     btn.classList.toggle('active', btnText.includes(cat));
                 }
             });
-            searchInput.value = cat;
             triggerSearch();
         }
 
         function triggerSearch() {
-            const val = searchInput.value.toLowerCase().trim();
+            currentSearchQuery = searchInput.value.toLowerCase().trim();
             listEl.innerHTML = '';
             currentIndex = 0;
-            if (val === '') {
-                filteredItems = [];
-            } else {
-                filteredItems = allItems.filter(item => item.title.toLowerCase().includes(val));
-            }
+            
+            filteredItems = allItems.filter(item => {
+                const matchesCategory = currentCategory === '' || item.title.toLowerCase().includes(currentCategory);
+                const matchesSearch = currentSearchQuery === '' || item.title.toLowerCase().includes(currentSearchQuery);
+                return matchesCategory && matchesSearch;
+            });
+            
             renderNext();
         }
 
-        // 搜尋邏輯
+        // 搜尋監聽 (不再覆蓋 category)
         searchInput.addEventListener('input', triggerSearch);
 
         // 滾動監聽
