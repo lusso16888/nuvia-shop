@@ -97,13 +97,24 @@
         const loadingEl = document.getElementById('loading');
         const searchInput = document.getElementById('searchInput');
 
-        // 從 HTML 註釋中自動提取資料或在這裡直接宣告 (我是研發師，我直接把資料在同步時注入到變數裡)
-        // 為了讓現有的 5000 筆資料生效，我會單獨寫一個腳本把目前的 5000 筆轉化成 JS 陣列
-        
         async function init() {
-            // 這裡會由同步腳本注入 allItems = [...]
-            // 暫時模擬載入
+            // 優先執行一次數據渲染
             renderNext();
+            
+            // --- 研發部新增：URL 參數自動搜尋邏輯 (方案三優化) ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                console.log('偵測到搜尋參數:', query);
+                searchInput.value = query; // 自動填入搜尋框
+                triggerSearch();           // 執行過濾
+                
+                // 平滑滾動到結果區域，避開 Header
+                setTimeout(() => {
+                    const headerHeight = document.querySelector('.sticky-wrapper').offsetHeight;
+                    window.scrollTo({ top: headerHeight - 10, behavior: 'smooth' });
+                }, 100);
+            }
         }
 
         function renderNext() {
